@@ -4,21 +4,21 @@ export const Columns = [
         columns: [
             {
                 Header: 'OI',
-                accessor: 'OI',
+                accessor: 'openInterest',
                 Cell: props => {
                     return props.value
                 }
             },
             {
                 Header: 'CHNG IN OI',
-                accessor: 'CHNG IN OI',
+                accessor: 'changeInOI',
                 Cell: props => {
                     return props.value
                 }
             },
             {
                 Header: 'VOLUME',
-                accessor: 'VOLUME',
+                accessor: ' totalTradedVolume',
                 Cell: props => {
                     return props.value
                 }
@@ -45,29 +45,36 @@ export const Columns = [
                 }
             },
             {
+                Header: 'BID',
+                accessor: 'bestBid',
+                Cell: props => {
+                    return props.value
+                }
+            },
+            {
                 Header: 'BID QTY',
-                accessor: 'BID QTY',
+                accessor: 'bestBidQty',
                 Cell: props => {
                     return props.value
                 }
             },
             {
                 Header: 'ASK',
-                accessor: 'ASK',
+                accessor: 'bestAsk',
                 Cell: props => {
                     return props.value
                 }
             },
             {
                 Header: 'ASK QTY',
-                accessor: 'ASK QTY',
+                accessor: 'bestAskQty',
                 Cell: props => {
                     return props.value
                 }
             },
             {
                 Header: 'STRIKE',
-                accessor: 'STRIKE',
+                accessor: 'strike',
                 Cell: props => {
                     return props.value
                 }
@@ -82,70 +89,70 @@ export const GColumns = [
         columns: [
             {
                 Header: 'OI',
-                accessor: 'OI',
+                accessor: 'putOI',
                 Cell: props => {
                     return props.value
                 }
             },
             {
                 Header: 'CHNG IN OI',
-                accessor: 'CHNG IN OI',
+                accessor: 'putCHNG IN OI',
                 Cell: props => {
                     return props.value
                 }
             },
             {
                 Header: 'VOLUME',
-                accessor: 'VOLUME',
+                accessor: 'putVOLUME',
                 Cell: props => {
                     return props.value
                 }
             },
             {
                 Header: 'IV',
-                accessor: 'IV',
+                accessor: 'putIV',
                 Cell: props => {
                     return props.value
                 }
             },
             {
                 Header: 'LTP',
-                accessor: 'LTP',
+                accessor: 'putLTP',
                 Cell: props => {
                     return props.value
                 }
             },
             {
                 Header: 'CHNG',
-                accessor: 'CHNG',
+                accessor: 'putCHNG',
                 Cell: props => {
                     return props.value
                 }
             },
             {
                 Header: 'BID QTY',
-                accessor: 'BID QTY',
+                accessor: 'putBID QTY',
                 Cell: props => {
                     return props.value
                 }
             },
             {
                 Header: 'ASK',
-                accessor: 'ASK',
+                accessor: 'putASK',
                 Cell: props => {
                     return props.value
                 }
             },
             {
                 Header: 'ASK QTY',
-                accessor: 'ASK QTY',
+                accessor: 'putASK QTY',
                 Cell: props => {
                     return props.value
                 }
             },
             {
                 Header: 'STRIKE',
-                accessor: 'STRIKE',
+                accessor: 'putSTRIKE',
                 Cell: props => {
                     return props.value
                 }
