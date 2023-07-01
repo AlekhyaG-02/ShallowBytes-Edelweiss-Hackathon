@@ -59,9 +59,9 @@ const Table = () => {
 
     return (
         <>
+            <h1>Option Chains</h1>
             <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
             <Filter filterOption={value1} filterData={filterData} filterLabel="Options" />
-            <h1>Option Chains</h1>
             <table {...getTableProps()}>
                 <thead>
                     {headerGroups.map((headerGroup) => (
