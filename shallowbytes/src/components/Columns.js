@@ -1,85 +1,104 @@
 export const Columns = [
     {
-        Header: 'Call',
+        id: 'col1',
+        Header: 'Column',
         columns: [
             {
-                Header: 'OI',
-                accessor: 'openInterest',
-                Cell: props => {
-                    return props.value
+                Header: 'Trade Index',
+                accessor: 'tradeIndex',
+                Cell: (props) => {
+                    return props.value;
                 }
+            },
+            {
+                Header: 'Type',
+                id: 'sub_col1a',
+                accessor: 'tradeOptionType',
+                Cell: (props) => {
+                    return props.value;
+                }
+            },
+            {
+                Header: 'OI',
+                id: 'sub_col1b',
+                accessor: 'OI',
+                Cell: (props) => {
+                    return props.value;
+                },
             },
             {
                 Header: 'CHNG IN OI',
-                accessor: 'changeInOI',
-                Cell: props => {
-                    return props.value
-                }
+                id: 'sub_col1c',
+                accessor: 'changeOI',
+                Cell: (props) => {
+                    return props.value;
+                },
             },
             {
                 Header: 'VOLUME',
-                accessor: ' totalTradedVolume',
-                Cell: props => {
-                    return props.value
-                }
-            },
-            {
-                Header: 'IV',
-                accessor: 'IV',
-                Cell: props => {
-                    return props.value
-                }
+                id: 'sub_col1d',
+                accessor: 'volume',
+                Cell: (props) => {
+                    return props.value;
+                },
             },
             {
                 Header: 'LTP',
+                id: 'sub_col1e',
                 accessor: 'LTP',
-                Cell: props => {
-                    return props.value
-                }
+                Cell: (props) => {
+                    return props.value;
+                },
             },
             {
-                Header: 'CHNG',
-                accessor: 'CHNG',
-                Cell: props => {
-                    return props.value
-                }
+                Header: 'Change in Price',
+                id: 'sub_col1f',
+                accessor: 'changePrice',
+                Cell: (props) => {
+                    return props.value;
+                },
             },
             {
-                Header: 'BID',
-                accessor: 'bestBid',
-                Cell: props => {
-                    return props.value
-                }
+                Header: 'Bid Price',
+                id: 'sub_col1g',
+                accessor: 'bidPrice',
+                Cell: (props) => {
+                    return props.value;
+                },
             },
             {
-                Header: 'BID QTY',
-                accessor: 'bestBidQty',
-                Cell: props => {
-                    return props.value
-                }
+                Header: 'Bid Quantity',
+                id: 'sub_col1h',
+                accessor: 'bidQuantity',
+                Cell: (props) => {
+                    return props.value;
+                },
             },
             {
-                Header: 'ASK',
-                accessor: 'bestAsk',
-                Cell: props => {
-                    return props.value
-                }
+                Header: 'Ask Price',
+                id: 'sub_col1i',
+                accessor: 'askPrice',
+                Cell: (props) => {
+                    return props.value;
+                },
             },
             {
                 Header: 'ASK QTY',
-                accessor: 'bestAskQty',
-                Cell: props => {
-                    return props.value
-                }
+                id: 'sub_col1j',
+                accessor: 'askQuantity',
+                Cell: (props) => {
+                    return props.value;
+                },
             },
             {
-                Header: 'STRIKE',
-                accessor: 'strike',
-                Cell: props => {
-                    return props.value
-                }
-            }
-        ]
+                Header: 'Strike',
+                id: 'sub_col1k',
+                accessor: 'strikePrice',
+                Cell: (props) => {
+                    return props.value;
+                },
+            },
+        ],
     }
 ]
 

@@ -1,20 +1,41 @@
 import React from 'react'
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import { useTable, useGlobalFilter, useSortBy } from 'react-table'
 import { Columns, GColumns } from './Columns'
 import './Table.css'
 import { GlobalFilter } from './GlobalFilter'
 import Filter from './Filter';
-import MOCK_DATA from './MOCK_DATA.json'
 
 const Table = () => {
-    const columns = useMemo(() => GColumns, [])
-    const optionChainsData = useMemo(() => MOCK_DATA, [])
+    const columns = useMemo(() => Columns, [])
+    const [data, setData] = useState([]);
 
-    // const tableInstance = useTable({
-    //     columns,
-    //     data: optionChainsData
-    // }, useGlobalFilter, useSortBy)
+    useEffect(() => {
+        const ws = new WebSocket('ws://localhost:8000');
+
+        ws.onmessage = (event) => {
+            const packetData = JSON.parse(event.data);
+            setData((prevData) => [...prevData, packetData]);
+
+        };
+
+        return () => {
+            ws.close();
+        };
+    }, []);
+
+    // useEffect(() => {
+    //     const interval = setInterval(() => {
+    //         window.location.reload();
+    //     }, 5000); // Refresh every 5 seconds
+
+    //     return () => {
+    //         clearInterval(interval);
+    //     };
+    // }, []);
+
+
+    const optionChainsData = useMemo(() => data, [data])
 
     const {
         getTableProps,
@@ -27,7 +48,7 @@ const Table = () => {
     } = useTable(
         {
             columns,
-            data: optionChainsData
+            data,
         },
         useGlobalFilter,
         useSortBy
@@ -38,8 +59,8 @@ const Table = () => {
     // const sortByStrike = () => {
     //     // Sort the rows based on the 'STRIKE' column
     //     const sortedRows = rows.sort((a, b) => {
-    //         const strikeA = a.values['Call.STRIKE'];
-    //         const strikeB = b.values['Call.STRIKE'];
+    //         const strikeA = a.values['strikePrice'];
+    //         const strikeB = b.values['strikePrice'];
     //         return strikeA - strikeB;
     //     });
 
@@ -65,23 +86,27 @@ const Table = () => {
             return optionChainsData;
         }
         return optionChainsData.filter(
-            (data) => data.symbol === selectedFilter
+            (data) => data.tradeIndex === selectedFilter
         );
     }, [optionChainsData, selectedFilter]);
     const value1 = [
         {
-            value: 'NIFTY',
+            value: 'ALL',
         },
         {
-            value: 'FINNIFTY',
+            value: 'ALLBANKS',
         },
         {
-            value: 'BANKNIFTY',
+            value: 'MAININDX',
         },
         {
-            value: 'MIDCPNIFTY',
+            value: 'FINANCIALS',
+        },
+        {
+            value: 'MIDCAPS',
         }
     ]
+
 
     return (
         <>
