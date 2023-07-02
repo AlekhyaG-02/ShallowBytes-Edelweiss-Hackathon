@@ -8,7 +8,7 @@ import Filter from './Filter';
 import MOCK_DATA from './MOCK_DATA.json'
 
 const Table = () => {
-    const columns = useMemo(() => Columns, [])
+    const columns = useMemo(() => GColumns, [])
     const optionChainsData = useMemo(() => MOCK_DATA, [])
 
     const tableInstance = useTable({

@@ -89,70 +89,70 @@ export const GColumns = [
         columns: [
             {
                 Header: 'OI',
-                accessor: 'putOI',
+                accessor: 'Call.OI',
                 Cell: props => {
                     return props.value
                 }
             },
             {
                 Header: 'CHNG IN OI',
-                accessor: 'putCHNG IN OI',
+                accessor: 'Call.CHNG IN OI',
                 Cell: props => {
                     return props.value
                 }
             },
             {
                 Header: 'VOLUME',
-                accessor: 'putVOLUME',
+                accessor: 'Call.VOLUME',
                 Cell: props => {
                     return props.value
                 }
             },
             {
                 Header: 'IV',
-                accessor: 'putIV',
+                accessor: 'Call.IV',
                 Cell: props => {
                     return props.value
                 }
             },
             {
                 Header: 'LTP',
-                accessor: 'putLTP',
+                accessor: 'Call.LTP',
                 Cell: props => {
                     return props.value
                 }
             },
             {
                 Header: 'CHNG',
-                accessor: 'putCHNG',
+                accessor: 'Call.CHNG',
                 Cell: props => {
                     return props.value
                 }
             },
             {
                 Header: 'BID QTY',
-                accessor: 'putBID QTY',
+                accessor: 'Call.BID QTY',
                 Cell: props => {
                     return props.value
                 }
             },
             {
                 Header: 'ASK',
-                accessor: 'putASK',
+                accessor: 'Call.ASK',
                 Cell: props => {
                     return props.value
                 }
             },
             {
                 Header: 'ASK QTY',
-                accessor: 'putASK QTY',
+                accessor: 'Call.ASK QTY',
                 Cell: props => {
                     return props.value
                 }
             },
             {
                 Header: 'STRIKE',
-                accessor: 'putSTRIKE',
+                accessor: 'Call.STRIKE',
                 Cell: props => {
                     return props.value
                 }
@@ -164,70 +164,70 @@ export const GColumns = [
         columns: [
             {
                 Header: 'OI',
-                accessor: 'OI',
+                accessor: 'Put.OI',
                 Cell: props => {
                     return props.value
                 }
             },
             {
                 Header: 'CHNG IN OI',
-                accessor: 'CHNG IN OI',
+                accessor: 'Put.CHNG IN OI',
                 Cell: props => {
                     return props.value
                 }
             },
             {
                 Header: 'VOLUME',
-                accessor: 'VOLUME',
+                accessor: 'Put.VOLUME',
                 Cell: props => {
                     return props.value
                 }
             },
             {
                 Header: 'IV',
-                accessor: 'IV',
+                accessor: 'Put.IV',
                 Cell: props => {
                     return props.value
                 }
             },
             {
                 Header: 'LTP',
-                accessor: 'LTP',
+                accessor: 'Put.LTP',
                 Cell: props => {
                     return props.value
                 }
             },
             {
                 Header: 'CHNG',
-                accessor: 'CHNG',
+                accessor: 'Put.CHNG',
                 Cell: props => {
                     return props.value
                 }
             },
             {
                 Header: 'BID QTY',
-                accessor: 'BID QTY',
+                accessor: 'Put.BID QTY',
                 Cell: props => {
                     return props.value
                 }
             },
             {
                 Header: 'ASK',
-                accessor: 'ASK',
+                accessor: 'Put.ASK',
                 Cell: props => {
                     return props.value
                 }
             },
             {
                 Header: 'ASK QTY',
-                accessor: 'ASK QTY',
+                accessor: 'Put.ASK QTY',
                 Cell: props => {
                     return props.value
                 }
             },
             {
                 Header: 'STRIKE',
-                accessor: 'STRIKE',
+                accessor: 'Put.STRIKE',
                 Cell: props => {
                     return props.value
                 }
