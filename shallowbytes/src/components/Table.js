@@ -1,6 +1,6 @@
 import React from 'react'
 import { useMemo, useState } from 'react'
-import { useTable, useGlobalFilter } from 'react-table'
+import { useTable, useGlobalFilter, useSortBy } from 'react-table'
 import { Columns, GColumns } from './Columns'
 import './Table.css'
 import { GlobalFilter } from './GlobalFilter'
@@ -11,10 +11,10 @@ const Table = () => {
     const columns = useMemo(() => GColumns, [])
     const optionChainsData = useMemo(() => MOCK_DATA, [])
 
-    const tableInstance = useTable({
-        columns,
-        data: optionChainsData
-    }, useGlobalFilter)
+    // const tableInstance = useTable({
+    //     columns,
+    //     data: optionChainsData
+    // }, useGlobalFilter, useSortBy)
 
     const {
         getTableProps,
@@ -23,10 +23,36 @@ const Table = () => {
         rows,
         prepareRow,
         state,
-        setGlobalFilter,
-    } = tableInstance
+        setGlobalFilter
+    } = useTable(
+        {
+            columns,
+            data: optionChainsData
+        },
+        useGlobalFilter,
+        useSortBy
+    );
 
     const { globalFilter } = state
+
+    // const sortByStrike = () => {
+    //     // Sort the rows based on the 'STRIKE' column
+    //     const sortedRows = rows.sort((a, b) => {
+    //         const strikeA = a.values['Call.STRIKE'];
+    //         const strikeB = b.values['Call.STRIKE'];
+    //         return strikeA - strikeB;
+    //     });
+
+    //     // Prepare sorted rows for rendering
+    //     const preparedRows = sortedRows.map(row => {
+    //         prepareRow(row);
+    //         return row;
+    //     });
+
+    //     return preparedRows;
+    // };
+
+    // const sortedRows = useMemo(sortByStrike, [rows]);
 
     const [selectedFilter, setSelectedFilter] = useState('');
 
@@ -67,8 +93,11 @@ const Table = () => {
                     {headerGroups.map((headerGroup) => (
                         <tr {...headerGroup.getHeaderGroupProps()}>
                             {headerGroup.headers.map((column) => (
-                                <th {...column.getHeaderProps()}>
+                                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                                     {column.render('Header')}
+                                    <span>
+                                        {column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}
+                                    </span>
                                 </th>
                             ))}
                         </tr>

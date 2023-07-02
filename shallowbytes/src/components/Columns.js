@@ -224,13 +224,6 @@ export const GColumns = [
                 Cell: props => {
                     return props.value
                 }
-            },
-            {
-                Header: 'STRIKE',
-                accessor: 'Put.STRIKE',
-                Cell: props => {
-                    return props.value
-                }
             }
         ]
     }
