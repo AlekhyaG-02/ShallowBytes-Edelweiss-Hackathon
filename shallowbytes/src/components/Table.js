@@ -1,13 +1,15 @@
 import React from 'react'
 import { useMemo, useState, useEffect } from 'react'
 import { useTable, useGlobalFilter, useSortBy } from 'react-table'
-import { Columns, GColumns } from './Columns'
+import { Columns, GColumns, CallColumns, PutColumns } from './Columns'
 import './Table.css'
 import { GlobalFilter } from './GlobalFilter'
-import Filter from './Filter';
+// import Filter from './Filter';
 
 const Table = () => {
-    const columns = useMemo(() => Columns, [])
+    const columns = useMemo(() => GColumns, [])
+    const callcolumns = useMemo(() => CallColumns, [])
+    const putcolumns = useMemo(() => PutColumns, [])
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -16,6 +18,37 @@ const Table = () => {
         ws.onmessage = (event) => {
             const packetData = JSON.parse(event.data);
             setData((prevData) => [...prevData, packetData]);
+
+            // if (packetData.tradeOptionType === 'CE') {
+            //     setData((prevData) => {
+            //         const newData = [...prevData];
+            //         const existingRow = newData.find(
+            //             (row) => row.strikePrice === packetData.strikePrice
+            //         );
+            //         if (existingRow) {
+            //             Object.assign(existingRow, packetData);
+            //         } else {
+            //             const newRow = { strikePrice: packetData.strikePrice };
+            //             newData.push(Object.assign(newRow, packetData));
+            //         }
+            //         return newData;
+            //     });
+            // } else if (packetData.tradeOptionType === 'PE') {
+            //     setData((prevData) => {
+            //         const newData = [...prevData];
+            //         const existingRow = newData.find(
+            //             (row) => row.strikePrice === packetData.strikePrice
+            //         );
+            //         if (existingRow) {
+            //             Object.assign(existingRow, packetData);
+            //         } else {
+            //             const newRow = { strikePrice: packetData.strikePrice };
+            //             newData.push(Object.assign(newRow, packetData));
+            //         }
+            //         return newData;
+            //     });
+            // }
+
 
         };
 
@@ -75,44 +108,45 @@ const Table = () => {
 
     // const sortedRows = useMemo(sortByStrike, [rows]);
 
-    const [selectedFilter, setSelectedFilter] = useState('');
+    // const [selectedFilter, setSelectedFilter] = useState('');
 
-    const filterData = (filter) => {
-        setSelectedFilter(filter);
-    };
+    // const filterData = (filter) => {
+    //     setSelectedFilter(filter);
+    // };
 
-    const filteredData = useMemo(() => {
-        if (!selectedFilter) {
-            return optionChainsData;
-        }
-        return optionChainsData.filter(
-            (data) => data.tradeIndex === selectedFilter
-        );
-    }, [optionChainsData, selectedFilter]);
-    const value1 = [
-        {
-            value: 'ALL',
-        },
-        {
-            value: 'ALLBANKS',
-        },
-        {
-            value: 'MAININDX',
-        },
-        {
-            value: 'FINANCIALS',
-        },
-        {
-            value: 'MIDCAPS',
-        }
-    ]
+    // const filteredData = useMemo(() => {
+    //     if (!selectedFilter) {
+    //         return data;
+    //     }
+    //     return data.filter(
+    //         (d) => d.tradeIndex === selectedFilter
+    //     );
+    // }, [data, selectedFilter]);
+
+    // const value1 = [
+    //     {
+    //         value: 'ALL',
+    //     },
+    //     {
+    //         value: 'ALLBANKS',
+    //     },
+    //     {
+    //         value: 'MAININDX',
+    //     },
+    //     {
+    //         value: 'FINANCIALS',
+    //     },
+    //     {
+    //         value: 'MIDCAPS',
+    //     }
+    // ]
 
 
     return (
         <>
             <h1>Option Chains</h1>
             <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
-            <Filter filterOption={value1} filterData={filterData} filterLabel="Options" />
+            {/* <Filter filterOption={value1} filterData={filterData} filterLabel="Options" /> */}
             <table {...getTableProps()}>
                 <thead>
                     {headerGroups.map((headerGroup) => (
