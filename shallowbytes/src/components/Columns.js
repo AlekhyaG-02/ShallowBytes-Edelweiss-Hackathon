@@ -199,7 +199,7 @@ export const CallColumns = [
             {
                 id: 'csub_col1',
                 Header: 'Trade Index',
-                accessor: (d) => d.tradeOptionType === 'CE' ? d.tradeIndex : undefined,
+                accessor: 'calltradeIndex',
                 Cell: (props) => {
                     return props.value;
                 }
@@ -215,7 +215,7 @@ export const CallColumns = [
             {
                 Header: 'OI',
                 id: 'csub_col1b',
-                accessor: (d) => d.tradeOptionType === 'CE' ? d.OI : undefined,
+                accessor: 'callOI',
                 Cell: (props) => {
                     return props.value;
                 },
@@ -223,7 +223,7 @@ export const CallColumns = [
             {
                 Header: 'Change in OI',
                 id: 'csub_col1c',
-                accessor: (d) => d.tradeOptionType === 'CE' ? d.changeOI : undefined,
+                accessor: 'callchangeOI',
                 Cell: (props) => {
                     return props.value;
                 },
@@ -231,7 +231,7 @@ export const CallColumns = [
             {
                 Header: 'VOLUME',
                 id: 'csub_col1d',
-                accessor: (d) => d.tradeOptionType === 'CE' ? d.volume : undefined,
+                accessor: 'callvolume',
                 Cell: (props) => {
                     return props.value;
                 },
@@ -239,7 +239,7 @@ export const CallColumns = [
             {
                 Header: 'LTP',
                 id: 'csub_col1e',
-                accessor: (d) => d.tradeOptionType === 'CE' ? d.LTP : undefined,
+                accessor: 'callLTP',
                 Cell: (props) => {
                     return props.value;
                 },
@@ -247,7 +247,7 @@ export const CallColumns = [
             {
                 Header: 'Change in Price',
                 id: 'csub_col1f',
-                accessor: (d) => d.tradeOptionType === 'CE' ? d.changePrice : undefined,
+                accessor: 'callchangePrice',
                 Cell: (props) => {
                     return props.value;
                 },
@@ -255,7 +255,7 @@ export const CallColumns = [
             {
                 Header: 'Bid Price',
                 id: 'csub_col1g',
-                accessor: (d) => d.tradeOptionType === 'CE' ? d.bidPrice : undefined,
+                accessor: 'callbidPrice',
                 Cell: (props) => {
                     return props.value;
                 },
@@ -263,7 +263,7 @@ export const CallColumns = [
             {
                 Header: 'Bid Quantity',
                 id: 'csub_col1h',
-                accessor: (d) => d.tradeOptionType === 'CE' ? d.bidQuantity : undefined,
+                accessor: 'callbidQuantity',
                 Cell: (props) => {
                     return props.value;
                 },
@@ -271,7 +271,7 @@ export const CallColumns = [
             {
                 Header: 'Ask Price',
                 id: 'csub_col1i',
-                accessor: (d) => d.tradeOptionType === 'CE' ? d.askPrice : undefined,
+                accessor: 'callaskPrice',
                 Cell: (props) => {
                     return props.value;
                 },
@@ -279,7 +279,7 @@ export const CallColumns = [
             {
                 Header: 'Ask Quantity',
                 id: 'csub_col1j',
-                accessor: (d) => d.tradeOptionType === 'CE' ? d.askQuantity : undefined,
+                accessor: 'callaskQuantity',
                 Cell: (props) => {
                     return props.value;
                 },
@@ -287,7 +287,7 @@ export const CallColumns = [
             {
                 Header: 'Strike',
                 id: 'csub_col1k',
-                accessor: (d) => d.tradeOptionType === 'CE' ? d.strikePrice : undefined,
+                accessor: 'callstrikePrice',
                 Cell: (props) => {
                     return props.value;
                 },
@@ -304,7 +304,7 @@ export const PutColumns = [
             {
                 id: 'psub_col1',
                 Header: 'Trade Index',
-                accessor: (d) => d.tradeOptionType === 'PE' ? d.tradeIndex : undefined,
+                accessor: 'puttradeIndex',
                 Cell: (props) => {
                     return props.value;
                 }
@@ -320,7 +320,7 @@ export const PutColumns = [
             {
                 Header: 'OI',
                 id: 'psub_col1b',
-                accessor: (d) => d.tradeOptionType === 'PE' ? d.OI : undefined,
+                accessor: 'putOI',
                 Cell: (props) => {
                     return props.value;
                 },
@@ -328,7 +328,7 @@ export const PutColumns = [
             {
                 Header: 'Change in OI',
                 id: 'psub_col1c',
-                accessor: (d) => d.tradeOptionType === 'PE' ? d.changeOI : undefined,
+                accessor: 'putchangeOI',
                 Cell: (props) => {
                     return props.value;
                 },
@@ -336,7 +336,7 @@ export const PutColumns = [
             {
                 Header: 'VOLUME',
                 id: 'psub_col1d',
-                accessor: (d) => d.tradeOptionType === 'PE' ? d.volume : undefined,
+                accessor: 'putvolume',
                 Cell: (props) => {
                     return props.value;
                 },
@@ -344,7 +344,7 @@ export const PutColumns = [
             {
                 Header: 'LTP',
                 id: 'psub_col1e',
-                accessor: (d) => d.tradeOptionType === 'PE' ? d.LTP : undefined,
+                accessor: 'putLTP',
                 Cell: (props) => {
                     return props.value;
                 },
@@ -352,7 +352,7 @@ export const PutColumns = [
             {
                 Header: 'Change in Price',
                 id: 'psub_col1f',
-                accessor: (d) => d.tradeOptionType === 'PE' ? d.changePrice : undefined,
+                accessor: 'putchangePrice',
                 Cell: (props) => {
                     return props.value;
                 },
@@ -360,7 +360,7 @@ export const PutColumns = [
             {
                 Header: 'Bid Price',
                 id: 'psub_col1g',
-                accessor: (d) => d.tradeOptionType === 'PE' ? d.bidPrice : undefined,
+                accessor: 'putbidPrice',
                 Cell: (props) => {
                     return props.value;
                 },
@@ -368,7 +368,7 @@ export const PutColumns = [
             {
                 Header: 'Bid Quantity',
                 id: 'psub_col1h',
-                accessor: (d) => d.tradeOptionType === 'PE' ? d.bidQuantity : undefined,
+                accessor: 'putbidQuantity',
                 Cell: (props) => {
                     return props.value;
                 },
@@ -376,7 +376,7 @@ export const PutColumns = [
             {
                 Header: 'Ask Price',
                 id: 'psub_col1i',
-                accessor: (d) => d.tradeOptionType === 'PE' ? d.askPrice : undefined,
+                accessor: 'putaskPrice',
                 Cell: (props) => {
                     return props.value;
                 },
@@ -384,7 +384,7 @@ export const PutColumns = [
             {
                 Header: 'Ask Quantity',
                 id: 'psub_col1j',
-                accessor: (d) => d.tradeOptionType === 'PE' ? d.askQuantity : undefined,
+                accessor: 'putaskQuantity',
                 Cell: (props) => {
                     return props.value;
                 },
@@ -392,7 +392,7 @@ export const PutColumns = [
             {
                 Header: 'Strike',
                 id: 'psub_col1k',
-                accessor: (d) => d.tradeOptionType === 'PE' ? d.strikePrice : undefined,
+                accessor: 'putstrikePrice',
                 Cell: (props) => {
                     return props.value;
                 },
@@ -433,7 +433,7 @@ export const GColumns = [
             {
                 Header: 'OI',
                 id: 'csub_col1b',
-                accessor: (d) => d.tradeOptionType === 'CE' ? d.OI : undefined,
+                accessor: 'callOI',
                 Cell: (props) => {
                     return props.value;
                 },
@@ -441,7 +441,7 @@ export const GColumns = [
             {
                 Header: 'Change in OI',
                 id: 'csub_col1c',
-                accessor: (d) => d.tradeOptionType === 'CE' ? d.changeOI : undefined,
+                accessor: 'callchangeOI',
                 Cell: (props) => {
                     return props.value;
                 },
@@ -449,7 +449,7 @@ export const GColumns = [
             {
                 Header: 'VOLUME',
                 id: 'csub_col1d',
-                accessor: (d) => d.tradeOptionType === 'CE' ? d.volume : undefined,
+                accessor: 'callvolume',
                 Cell: (props) => {
                     return props.value;
                 },
@@ -457,7 +457,7 @@ export const GColumns = [
             {
                 Header: 'LTP',
                 id: 'csub_col1e',
-                accessor: (d) => d.tradeOptionType === 'CE' ? d.LTP : undefined,
+                accessor: 'callLTP',
                 Cell: (props) => {
                     return props.value;
                 },
@@ -465,7 +465,7 @@ export const GColumns = [
             {
                 Header: 'Change in Price',
                 id: 'csub_col1f',
-                accessor: (d) => d.tradeOptionType === 'CE' ? d.changePrice : undefined,
+                accessor: 'callchangePrice',
                 Cell: (props) => {
                     return props.value;
                 },
@@ -473,7 +473,7 @@ export const GColumns = [
             {
                 Header: 'Bid Price',
                 id: 'csub_col1g',
-                accessor: (d) => d.tradeOptionType === 'CE' ? d.bidPrice : undefined,
+                accessor: 'callbidPrice',
                 Cell: (props) => {
                     return props.value;
                 },
@@ -481,7 +481,7 @@ export const GColumns = [
             {
                 Header: 'Bid Quantity',
                 id: 'csub_col1h',
-                accessor: (d) => d.tradeOptionType === 'CE' ? d.bidQuantity : undefined,
+                accessor: 'callbidQuantity',
                 Cell: (props) => {
                     return props.value;
                 },
@@ -489,7 +489,7 @@ export const GColumns = [
             {
                 Header: 'Ask Price',
                 id: 'csub_col1i',
-                accessor: (d) => d.tradeOptionType === 'CE' ? d.askPrice : undefined,
+                accessor: 'callaskPrice',
                 Cell: (props) => {
                     return props.value;
                 },
@@ -497,7 +497,7 @@ export const GColumns = [
             {
                 Header: 'Ask Quantity',
                 id: 'csub_col1j',
-                accessor: (d) => d.tradeOptionType === 'CE' ? d.askQuantity : undefined,
+                accessor: 'callaskQuantity',
                 Cell: (props) => {
                     return props.value;
                 },
@@ -542,7 +542,7 @@ export const GColumns = [
             {
                 Header: 'OI',
                 id: 'psub_col1b',
-                accessor: (d) => d.tradeOptionType === 'PE' ? d.OI : undefined,
+                accessor: 'putOI',
                 Cell: (props) => {
                     return props.value;
                 },
@@ -550,7 +550,7 @@ export const GColumns = [
             {
                 Header: 'Change in OI',
                 id: 'psub_col1c',
-                accessor: (d) => d.tradeOptionType === 'PE' ? d.changeOI : undefined,
+                accessor: 'putchangeOI',
                 Cell: (props) => {
                     return props.value;
                 },
@@ -558,7 +558,7 @@ export const GColumns = [
             {
                 Header: 'VOLUME',
                 id: 'psub_col1d',
-                accessor: (d) => d.tradeOptionType === 'PE' ? d.volume : undefined,
+                accessor: 'putvolume',
                 Cell: (props) => {
                     return props.value;
                 },
@@ -566,7 +566,7 @@ export const GColumns = [
             {
                 Header: 'LTP',
                 id: 'psub_col1e',
-                accessor: (d) => d.tradeOptionType === 'PE' ? d.LTP : undefined,
+                accessor: 'putLTP',
                 Cell: (props) => {
                     return props.value;
                 },
@@ -574,7 +574,7 @@ export const GColumns = [
             {
                 Header: 'Change in Price',
                 id: 'psub_col1f',
-                accessor: (d) => d.tradeOptionType === 'PE' ? d.changePrice : undefined,
+                accessor: 'putchangePrice',
                 Cell: (props) => {
                     return props.value;
                 },
@@ -582,7 +582,7 @@ export const GColumns = [
             {
                 Header: 'Bid Price',
                 id: 'psub_col1g',
-                accessor: (d) => d.tradeOptionType === 'PE' ? d.bidPrice : undefined,
+                accessor: 'putbidPrice',
                 Cell: (props) => {
                     return props.value;
                 },
@@ -590,7 +590,7 @@ export const GColumns = [
             {
                 Header: 'Bid Quantity',
                 id: 'psub_col1h',
-                accessor: (d) => d.tradeOptionType === 'PE' ? d.bidQuantity : undefined,
+                accessor: 'putbidQuantity',
                 Cell: (props) => {
                     return props.value;
                 },
@@ -598,7 +598,7 @@ export const GColumns = [
             {
                 Header: 'Ask Price',
                 id: 'psub_col1i',
-                accessor: (d) => d.tradeOptionType === 'PE' ? d.askPrice : undefined,
+                accessor: 'putaskPrice',
                 Cell: (props) => {
                     return props.value;
                 },
@@ -606,7 +606,7 @@ export const GColumns = [
             {
                 Header: 'Ask Quantity',
                 id: 'psub_col1j',
-                accessor: (d) => d.tradeOptionType === 'PE' ? d.askQuantity : undefined,
+                accessor: 'putaskQuantity',
                 Cell: (props) => {
                     return props.value;
                 },

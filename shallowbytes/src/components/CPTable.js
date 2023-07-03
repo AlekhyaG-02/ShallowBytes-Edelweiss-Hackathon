@@ -22,9 +22,9 @@ const CPTable = () => {
         };
     }, []);
 
-    const filteredData = useMemo(() => {
-        return data.filter((item) => item.tradeOptionType === 'CE' || item.tradeOptionType === 'PE');
-    }, [data]);
+    // const filteredData = useMemo(() => {
+    //     return data.filter((item) => item.tradeOptionType === 'CE' || item.tradeOptionType === 'PE');
+    // }, [data]);
 
     const optionChainsData = useMemo(() => data, [data]);
 
@@ -38,7 +38,7 @@ const CPTable = () => {
     } = useTable(
         {
             columns: CallColumns,
-            data: filteredData,
+            data,
         },
         useGlobalFilter,
         useSortBy
@@ -54,7 +54,7 @@ const CPTable = () => {
     } = useTable(
         {
             columns: PutColumns,
-            data: filteredData,
+            data,
         },
         useGlobalFilter,
         useSortBy
@@ -73,6 +73,16 @@ const CPTable = () => {
         { value: 'FINANCIALS', label: 'FINANCIALS' },
         { value: 'MIDCAPS', label: 'MIDCAPS' },
     ];
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            window.location.reload();
+        }, 12000);
+
+        return () => {
+            clearInterval(interval);
+        };
+    }, []);
 
     return (
         <>

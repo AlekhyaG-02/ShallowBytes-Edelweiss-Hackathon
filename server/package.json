@@ -1,7 +1,6 @@
 {
   "name": "test",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -10,6 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "black-scholes": "^1.1.0",
+    "jstat": "^1.9.6",
     "ws": "^8.13.0"
-  }
+  },
+  "description": ""
 }

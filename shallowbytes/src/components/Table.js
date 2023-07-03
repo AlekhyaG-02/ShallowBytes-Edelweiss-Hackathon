@@ -1,13 +1,13 @@
 import React from 'react'
 import { useMemo, useState, useEffect } from 'react'
 import { useTable, useGlobalFilter, useSortBy } from 'react-table'
-import { Columns, GColumns, TestCols } from './Columns'
+import { Columns, GColumns } from './Columns'
 import './Table.css'
 import { GlobalFilter } from './GlobalFilter'
 import { Filter } from './Filter';
 
 const Table = () => {
-    const columns = useMemo(() => TestCols, [])
+    const columns = useMemo(() => GColumns, [])
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -135,6 +135,7 @@ const Table = () => {
             <h1>Option Chains</h1>
             {/* <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} /> */}
             <Filter name="Filter" filter={globalFilter} setFilter={setGlobalFilter} options={options} />
+            {/* <Filter name="Strike Price" filter={globalFilter} setFilter={setGlobalFilter} options={strikePriceOptions} /> */}
             <table {...getTableProps()}>
                 <thead>
                     {headerGroups.map((headerGroup) => (
