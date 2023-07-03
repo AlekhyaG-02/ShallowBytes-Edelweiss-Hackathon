@@ -1,27 +1,21 @@
 import React from 'react';
 
-const Filter = ({ filterOption, filterData, filterLabel }) => {
+export const Filter = ({ filter, setFilter, options }) => {
     const handleFilterChange = (e) => {
-        const selectedFilter = e.target.value;
-        filterData(selectedFilter);
+        setFilter(e.target.value);
     };
 
-
     return (
-        <div>
-            <label htmlFor="filter">{filterLabel} </label>
-            <select id="filter" onChange={handleFilterChange}>
-                {filterOption.map((option) => (
-                    <option value={option.value}>{option.value}</option>
+        <span>
+            Filter: {' '}
+            <select value={filter} onChange={handleFilterChange}>
+                {options.map((option) => (
+                    <option key={option.value} value={option.value}>
+                        {option.label}
+                    </option>
                 ))}
-                {/* <option value="">All</option>
-                <option value="NIFTY">NIFTY</option>
-                <option value="FINNIFTY">FINNIFTY</option>
-                <option value="BANKNIFTY">BANKNIFTY</option>
-                <option value="MIDCPNIFTY">MIDCPNIFTY</option> */}
             </select>
-        </div>
+        </span>
     );
 };
 
-export default Filter;

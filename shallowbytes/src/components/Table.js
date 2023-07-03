@@ -1,15 +1,13 @@
 import React from 'react'
 import { useMemo, useState, useEffect } from 'react'
 import { useTable, useGlobalFilter, useSortBy } from 'react-table'
-import { Columns, GColumns, CallColumns, PutColumns } from './Columns'
+import { Columns, GColumns } from './Columns'
 import './Table.css'
 import { GlobalFilter } from './GlobalFilter'
-// import Filter from './Filter';
+import { Filter } from './Filter';
 
 const Table = () => {
     const columns = useMemo(() => GColumns, [])
-    const callcolumns = useMemo(() => CallColumns, [])
-    const putcolumns = useMemo(() => PutColumns, [])
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -123,30 +121,20 @@ const Table = () => {
     //     );
     // }, [data, selectedFilter]);
 
-    // const value1 = [
-    //     {
-    //         value: 'ALL',
-    //     },
-    //     {
-    //         value: 'ALLBANKS',
-    //     },
-    //     {
-    //         value: 'MAININDX',
-    //     },
-    //     {
-    //         value: 'FINANCIALS',
-    //     },
-    //     {
-    //         value: 'MIDCAPS',
-    //     }
-    // ]
+    const options = [
+        { value: '', label: 'ALL' },
+        { value: 'ALLBANKS', label: 'ALLBANKS' },
+        { value: 'MAINIDX', label: 'MAINIDX' },
+        { value: 'FINANCIALS', label: 'FINANCIALS' },
+        { value: 'MIDCAPS', label: 'MIDCAPS' },
+    ];
 
 
     return (
         <>
             <h1>Option Chains</h1>
-            <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
-            {/* <Filter filterOption={value1} filterData={filterData} filterLabel="Options" /> */}
+            {/* <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} /> */}
+            <Filter filter={globalFilter} setFilter={setGlobalFilter} options={options} />
             <table {...getTableProps()}>
                 <thead>
                     {headerGroups.map((headerGroup) => (
