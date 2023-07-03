@@ -103,6 +103,93 @@ export const Columns = [
     }
 ]
 
+export const TestCols = [
+    {
+        id: 'col1',
+        Header: 'Call',
+        columns: [
+            {
+                id: 'csub_col1',
+                Header: 'Trade Index',
+                accessor: (d) => {
+                    if (d.tradeOptionType === 'CE') {
+                        return d.tradeIndex;
+                    }
+                },
+                Cell: (props) => {
+                    return props.value;
+                }
+            },
+            {
+                Header: 'OI',
+                id: 'sub_col1b',
+                accessor: (d) => {
+                    if (d.tradeOptionType === 'CE') {
+                        return d.OI;
+                    }
+                },
+                Cell: (props) => {
+                    return props.value;
+                }
+            },
+            {
+                Header: 'Change in OI',
+                id: 'sub_col1c',
+                accessor: (d) => {
+                    if (d.tradeOptionType === 'CE') {
+                        return d.changeOI;
+                    }
+                },
+                Cell: (props) => {
+                    return props.value;
+                }
+            },
+        ],
+    },
+    {
+        id: 'col2',
+        Header: 'Put',
+        columns: [
+            {
+                id: 'csub_col2',
+                Header: 'Trade Index',
+                accessor: (d) => {
+                    if (d.tradeOptionType === 'PE') {
+                        return d.tradeIndex;
+                    }
+                },
+                Cell: (props) => {
+                    return props.value;
+                }
+            },
+            {
+                Header: 'OI',
+                id: 'sub_col2b',
+                accessor: (d) => {
+                    if (d.tradeOptionType === 'PE') {
+                        return d.OI;
+                    }
+                },
+                Cell: (props) => {
+                    return props.value;
+                }
+            },
+            {
+                Header: 'Change in OI',
+                id: 'sub_col2c',
+                accessor: (d) => {
+                    if (d.tradeOptionType === 'PE') {
+                        return d.changeOI;
+                    }
+                },
+                Cell: (props) => {
+                    return props.value;
+                }
+            },
+        ],
+    }
+]
+
 
 export const CallColumns = [
     {

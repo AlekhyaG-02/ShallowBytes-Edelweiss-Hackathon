@@ -78,7 +78,8 @@ const CPTable = () => {
         <>
             <h1>Option Chains</h1>
             {/* <GlobalFilter filter={globalFilter} setFilter={updateGlobalFilter} /> */}
-            <Filter filter={globalFilter} setFilter={updateGlobalFilter} options={options} />
+            <Filter name="Filter" filter={globalFilter} setFilter={updateGlobalFilter} options={options} />
+            {/* <Filter name="Strike" filter={globalFilter} setFilter={updateGlobalFilter} options={strikePriceOptions} /> */}
 
             {/* <br></br>
             <br></br> */}
