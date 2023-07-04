@@ -96,145 +96,285 @@ const client = net.connect({ port: 9011 }, () => {
     client.write('0')
 })
 
-client.on('data', (data) => {
+let i = 0;
 
-    const buffer = Buffer.alloc(130, data)
-    let tradingSymbol = buffer.toString('binary', 4, 30).replace(/\0/g, '')
-    // console.log(tradingSymbol)
-    let tradingCleaned = tradingSymbol.replace(/\0/g, '')
+client.on('connect', () => {
 
-    let sequenceNumber = Number(buffer.readBigInt64LE(34))
-    let timestamp = Number(buffer.readBigInt64LE(42))
-    let LTP = Number(buffer.readBigInt64LE(50))
-    let LTQ = Number(buffer.readBigInt64LE(58))
-    let volume = Number(buffer.readBigInt64LE(66))
-    let bidPrice = Number(buffer.readBigInt64LE(74))
-    let bidQuantity = Number(buffer.readBigInt64LE(82))
-    let askPrice = Number(buffer.readBigInt64LE(90))
-    let askQuantity = Number(buffer.readBigInt64LE(98))
-    let OI = Number(buffer.readBigInt64LE(106))
-    let previousClose = Number(buffer.readBigInt64LE(114))
-    let previousOI = Number(buffer.readBigInt64LE(122))
+    wss.on('connection', (ws) => {
 
-    if (tradingCleaned == "ALLBANKS") {
-        arrayIV[0] = LTP
-        // console.log(1)
-    }
-    if (tradingCleaned == "MIDCAPS") {
-        arrayIV[2] = LTP
-        // console.log(2)
-    }
-    if (tradingCleaned == "FINANCIALS") {
-        arrayIV[3] = LTP
-        // console.log(3)
-    }
-    if (tradingCleaned == "MAINIDX") {
-        arrayIV[1] = LTP
-        // console.log(4)
-    }
+        client.on('data', (data) => {
 
+            const buffer = Buffer.alloc(130, data)
+            let tradingSymbol = buffer.toString('binary', 4, 30).replace(/\0/g, '')
+            // console.log(tradingSymbol)
+            let tradingCleaned = tradingSymbol.replace(/\0/g, '')
 
-    let symbolDetails = validateData(tradingSymbol, timestamp)
+            let sequenceNumber = Number(buffer.readBigInt64LE(34))
+            let timestamp = Number(buffer.readBigInt64LE(42))
+            let LTP = Number(buffer.readBigInt64LE(50))
+            let LTQ = Number(buffer.readBigInt64LE(58))
+            let volume = Number(buffer.readBigInt64LE(66))
+            let bidPrice = Number(buffer.readBigInt64LE(74))
+            let bidQuantity = Number(buffer.readBigInt64LE(82))
+            let askPrice = Number(buffer.readBigInt64LE(90))
+            let askQuantity = Number(buffer.readBigInt64LE(98))
+            let OI = Number(buffer.readBigInt64LE(106))
+            let previousClose = Number(buffer.readBigInt64LE(114))
+            let previousOI = Number(buffer.readBigInt64LE(122))
 
-    if (symbolDetails) {
-
-        const indices = ["ALLBANKS", "MAINIDX", "MIDCAPS", "FINANCIALS"]
-        let IV = 0
-        let indexIV = 0
-
-        for (let i = 0; i < indices.length; i++) {
-            if (indices[i].includes(symbolDetails.typeOfIndex)) {
-                indexIV = Number(arrayIV[i])
-                break
+            if (tradingCleaned == "ALLBANKS") {
+                arrayIV[0] = LTP
+                // console.log(1)
             }
-        }
-
-        if (indexIV && symbolDetails.ttm >= 0) {
-
-            let optionLTP = Number(LTP)
-            let strikePriceIV = Number(symbolDetails.strikePrice)
-            let ttmIV = Number(symbolDetails.ttm).toFixed(5)
-
-            // console.log(optionLTP, indexIV, strikePriceIV, ttmIV)
-            if (symbolDetails.typeOfOption == "CE") {
-                IV = getImpliedVolatility(optionLTP, indexIV, strikePriceIV, ttmIV, 0, "put")
+            if (tradingCleaned == "MIDCAPS") {
+                arrayIV[2] = LTP
+                // console.log(2)
             }
-            else {
-                IV = getImpliedVolatility(optionLTP, indexIV, strikePriceIV, ttmIV, 0, "call")
+            if (tradingCleaned == "FINANCIALS") {
+                arrayIV[3] = LTP
+                // console.log(3)
             }
-        }
-        else {
-            IV = 0
-        }
-
-        IV = IV.toFixed(2)
-        let packetData = {}
-
-        if (symbolDetails.typeOfOption === "CE") {
-
-            packetData = {
-
-                calltradingSymbol: String(tradingSymbol).replace(/\0/g, ''),
-                calltradeIndex: symbolDetails.typeOfIndex,
-                tradeIndex: symbolDetails.typeOfIndex,
-                calltradeOptionType: symbolDetails.typeOfOption,
-                calltradeDate: symbolDetails.date,
-                callstrikePrice: Number(symbolDetails.strikePrice),
-                strikePrice: Number(symbolDetails.strikePrice),
-                calltimestamp: symbolDetails.timestamp,
-                callsequenceNumber: sequenceNumber,
-                callLTP: LTP,
-                callLTQ: LTQ,
-                callchangePrice: Number((((LTP - previousClose) * 100) / previousClose).toFixed(2)),
-                callvolume: volume,
-                callbidPrice: bidPrice,
-                callbidQuantity: bidQuantity,
-                callaskPrice: askPrice,
-                callaskQuantity: askQuantity,
-                callOI: OI,
-                callchangeOI: OI - previousOI,
-                callIV: Number(IV).toFixed(2)
+            if (tradingCleaned == "MAINIDX") {
+                arrayIV[1] = LTP
+                // console.log(4)
             }
-        }
-        else {
 
-            packetData = {
 
-                puttradingSymbol: String(tradingSymbol).replace(/\0/g, ''),
-                puttradeIndex: symbolDetails.typeOfIndex,
-                tradeIndex: symbolDetails.typeOfIndex,
-                puttradeOptionType: symbolDetails.typeOfOption,
-                puttradeDate: symbolDetails.date,
-                putstrikePrice: Number(symbolDetails.strikePrice),
-                strikePrice: Number(symbolDetails.strikePrice),
-                puttimestamp: symbolDetails.timestamp,
-                putsequenceNumber: sequenceNumber,
-                putLTP: LTP,
-                putLTQ: LTQ,
-                putchangePrice: Number((((LTP - previousClose) * 100) / previousClose).toFixed(2)),
-                putvolume: volume,
-                putbidPrice: bidPrice,
-                putbidQuantity: bidQuantity,
-                putaskPrice: askPrice,
-                putaskQuantity: askQuantity,
-                putOI: OI,
-                putchangeOI: OI - previousOI,
-                putIV: Number(IV).toFixed(2)
+            let symbolDetails = validateData(tradingSymbol, timestamp)
+
+            if (symbolDetails) {
+
+                const indices = ["ALLBANKS", "MAINIDX", "MIDCAPS", "FINANCIALS"]
+                let IV = 0
+                let indexIV = 0
+
+                for (let i = 0; i < indices.length; i++) {
+                    if (indices[i].includes(symbolDetails.typeOfIndex)) {
+                        indexIV = Number(arrayIV[i])
+                        break
+                    }
+                }
+
+                if (indexIV && symbolDetails.ttm >= 0) {
+
+                    let optionLTP = Number(LTP)
+                    let strikePriceIV = Number(symbolDetails.strikePrice)
+                    let ttmIV = Number(symbolDetails.ttm).toFixed(5)
+
+                    // console.log(optionLTP, indexIV, strikePriceIV, ttmIV)
+                    if (symbolDetails.typeOfOption == "CE") {
+                        IV = getImpliedVolatility(optionLTP, indexIV, strikePriceIV, ttmIV, 0, "put")
+                    }
+                    else {
+                        IV = getImpliedVolatility(optionLTP, indexIV, strikePriceIV, ttmIV, 0, "call")
+                    }
+                }
+                else {
+                    IV = 0
+                }
+
+                IV = IV.toFixed(2)
+                let packetData = {}
+
+                if (symbolDetails.typeOfOption === "CE") {
+
+                    packetData = {
+                        calltradingSymbol: String(tradingSymbol).replace(/\0/g, ''),
+                        calltradeIndex: symbolDetails.typeOfIndex,
+                        tradeIndex: symbolDetails.typeOfIndex,
+                        calltradeOptionType: symbolDetails.typeOfOption,
+                        calltradeDate: symbolDetails.date,
+                        callstrikePrice: Number(symbolDetails.strikePrice),
+                        strikePrice: Number(symbolDetails.strikePrice),
+                        calltimestamp: symbolDetails.timestamp,
+                        callsequenceNumber: sequenceNumber,
+                        callLTP: LTP,
+                        callLTQ: LTQ,
+                        callchangePrice: Number((((LTP - previousClose) * 100) / previousClose).toFixed(2)),
+                        callvolume: volume,
+                        callbidPrice: bidPrice,
+                        callbidQuantity: bidQuantity,
+                        callaskPrice: askPrice,
+                        callaskQuantity: askQuantity,
+                        callOI: OI,
+                        callchangeOI: OI - previousOI,
+                        callIV: Number(IV).toFixed(2)
+                    }
+                }
+                else {
+                    packetData = {
+                        puttradingSymbol: String(tradingSymbol).replace(/\0/g, ''),
+                        puttradeIndex: symbolDetails.typeOfIndex,
+                        tradeIndex: symbolDetails.typeOfIndex,
+                        puttradeOptionType: symbolDetails.typeOfOption,
+                        puttradeDate: symbolDetails.date,
+                        putstrikePrice: Number(symbolDetails.strikePrice),
+                        strikePrice: Number(symbolDetails.strikePrice),
+                        puttimestamp: symbolDetails.timestamp,
+                        putsequenceNumber: sequenceNumber,
+                        putLTP: LTP,
+                        putLTQ: LTQ,
+                        putchangePrice: Number((((LTP - previousClose) * 100) / previousClose).toFixed(2)),
+                        putvolume: volume,
+                        putbidPrice: bidPrice,
+                        putbidQuantity: bidQuantity,
+                        putaskPrice: askPrice,
+                        putaskQuantity: askQuantity,
+                        putOI: OI,
+                        putchangeOI: OI - previousOI,
+                        putIV: Number(IV).toFixed(2)
+                    }
+                }
+
+                let packetString = JSON.stringify(packetData)
+                ws.send(packetString)
+                console.log(i++)
             }
-        }
-
-
-
-        let packetString = JSON.stringify(packetData)
-
-        wss.on('connection', (ws) => {
-            console.log(packetString)
-            ws.send(packetString)
         })
-    }
+        console.log("WOHOOo")
+    })
 
-    client.end()
+})
+
+// client.on('data', (data) => {
+
+//     const buffer = Buffer.alloc(130, data)
+//     let tradingSymbol = buffer.toString('binary', 4, 30).replace(/\0/g, '')
+//     // console.log(tradingSymbol)
+//     let tradingCleaned = tradingSymbol.replace(/\0/g, '')
+
+//     let sequenceNumber = Number(buffer.readBigInt64LE(34))
+//     let timestamp = Number(buffer.readBigInt64LE(42))
+//     let LTP = Number(buffer.readBigInt64LE(50))
+//     let LTQ = Number(buffer.readBigInt64LE(58))
+//     let volume = Number(buffer.readBigInt64LE(66))
+//     let bidPrice = Number(buffer.readBigInt64LE(74))
+//     let bidQuantity = Number(buffer.readBigInt64LE(82))
+//     let askPrice = Number(buffer.readBigInt64LE(90))
+//     let askQuantity = Number(buffer.readBigInt64LE(98))
+//     let OI = Number(buffer.readBigInt64LE(106))
+//     let previousClose = Number(buffer.readBigInt64LE(114))
+//     let previousOI = Number(buffer.readBigInt64LE(122))
+
+//     if (tradingCleaned == "ALLBANKS") {
+//         arrayIV[0] = LTP
+//         // console.log(1)
+//     }
+//     if (tradingCleaned == "MIDCAPS") {
+//         arrayIV[2] = LTP
+//         // console.log(2)
+//     }
+//     if (tradingCleaned == "FINANCIALS") {
+//         arrayIV[3] = LTP
+//         // console.log(3)
+//     }
+//     if (tradingCleaned == "MAINIDX") {
+//         arrayIV[1] = LTP
+//         // console.log(4)
+//     }
 
 
-});
+//     let symbolDetails = validateData(tradingSymbol, timestamp)
+
+//     if (symbolDetails) {
+
+//         const indices = ["ALLBANKS", "MAINIDX", "MIDCAPS", "FINANCIALS"]
+//         let IV = 0
+//         let indexIV = 0
+
+//         for (let i = 0; i < indices.length; i++) {
+//             if (indices[i].includes(symbolDetails.typeOfIndex)) {
+//                 indexIV = Number(arrayIV[i])
+//                 break
+//             }
+//         }
+
+//         if (indexIV && symbolDetails.ttm >= 0) {
+
+//             let optionLTP = Number(LTP)
+//             let strikePriceIV = Number(symbolDetails.strikePrice)
+//             let ttmIV = Number(symbolDetails.ttm).toFixed(5)
+
+//             // console.log(optionLTP, indexIV, strikePriceIV, ttmIV)
+//             if (symbolDetails.typeOfOption == "CE") {
+//                 IV = getImpliedVolatility(optionLTP, indexIV, strikePriceIV, ttmIV, 0, "put")
+//             }
+//             else {
+//                 IV = getImpliedVolatility(optionLTP, indexIV, strikePriceIV, ttmIV, 0, "call")
+//             }
+//         }
+//         else {
+//             IV = 0
+//         }
+
+//         IV = IV.toFixed(2)
+//         let packetData = {}
+
+//         if (symbolDetails.typeOfOption === "CE") {
+
+//             packetData = {
+
+//                 calltradingSymbol: String(tradingSymbol).replace(/\0/g, ''),
+//                 calltradeIndex: symbolDetails.typeOfIndex,
+//                 tradeIndex: symbolDetails.typeOfIndex,
+//                 calltradeOptionType: symbolDetails.typeOfOption,
+//                 calltradeDate: symbolDetails.date,
+//                 callstrikePrice: Number(symbolDetails.strikePrice),
+//                 strikePrice: Number(symbolDetails.strikePrice),
+//                 calltimestamp: symbolDetails.timestamp,
+//                 callsequenceNumber: sequenceNumber,
+//                 callLTP: LTP,
+//                 callLTQ: LTQ,
+//                 callchangePrice: Number((((LTP - previousClose) * 100) / previousClose).toFixed(2)),
+//                 callvolume: volume,
+//                 callbidPrice: bidPrice,
+//                 callbidQuantity: bidQuantity,
+//                 callaskPrice: askPrice,
+//                 callaskQuantity: askQuantity,
+//                 callOI: OI,
+//                 callchangeOI: OI - previousOI,
+//                 callIV: Number(IV).toFixed(2)
+//             }
+//         }
+//         else {
+
+//             packetData = {
+
+//                 puttradingSymbol: String(tradingSymbol).replace(/\0/g, ''),
+//                 puttradeIndex: symbolDetails.typeOfIndex,
+//                 tradeIndex: symbolDetails.typeOfIndex,
+//                 puttradeOptionType: symbolDetails.typeOfOption,
+//                 puttradeDate: symbolDetails.date,
+//                 putstrikePrice: Number(symbolDetails.strikePrice),
+//                 strikePrice: Number(symbolDetails.strikePrice),
+//                 puttimestamp: symbolDetails.timestamp,
+//                 putsequenceNumber: sequenceNumber,
+//                 putLTP: LTP,
+//                 putLTQ: LTQ,
+//                 putchangePrice: Number((((LTP - previousClose) * 100) / previousClose).toFixed(2)),
+//                 putvolume: volume,
+//                 putbidPrice: bidPrice,
+//                 putbidQuantity: bidQuantity,
+//                 putaskPrice: askPrice,
+//                 putaskQuantity: askQuantity,
+//                 putOI: OI,
+//                 putchangeOI: OI - previousOI,
+//                 putIV: Number(IV).toFixed(2)
+//             }
+//         }
+
+
+
+//         let packetString = JSON.stringify(packetData)
+
+//         wss.on('connection', (ws) => {
+//             console.log(packetString)
+//             ws.send(packetString)
+//         })
+//     }
+
+//     client.end()
+
+
+// });
 

@@ -1,14 +1,16 @@
 import React from 'react'
-import { useMemo, useState, useEffect } from 'react'
+import { useMemo, useState, useEffect, setState } from 'react'
 import { useTable, useGlobalFilter, useSortBy } from 'react-table'
-import { Columns, GColumns } from './Columns'
-import './Table.css'
-import { GlobalFilter } from './GlobalFilter'
+import { GColumns } from './Columns'
+import './Table.css';
+// import { GlobalFilter } from './GlobalFilter';
 import { Filter } from './Filter';
 
 const Table = () => {
     const columns = useMemo(() => GColumns, [])
     const [data, setData] = useState([]);
+    const [backupData, setBackupData] = useState([]);
+
     // const [strikePriceOptions, setStrikePriceOptions] = useState([]);
     // const [selectedFilter, setSelectedFilter] = useState('');
 
@@ -18,6 +20,8 @@ const Table = () => {
 
         ws.onmessage = async (event) => {
             const packetData = await JSON.parse(event.data);
+
+
             setData((prevData) => {
                 const newData = [...prevData];
 
@@ -25,7 +29,8 @@ const Table = () => {
                 const existingRowIndex = newData.findIndex(
                     (row) =>
                         row.strikePrice === packetData.strikePrice &&
-                        row.tradeOptionType === packetData.tradeOptionType
+                        row.tradeOptionType === packetData.tradeOptionType &&
+                        row.tradeIndex === packetData.tradeIndex
                 );
 
                 if (existingRowIndex !== -1) {
@@ -57,7 +62,9 @@ const Table = () => {
 
                 // setStrikePriceOptions(options);
 
-                // newData.sort((a, b) => a.strikePrice - b.strikePrice);
+                newData.sort((a, b) => a.strikePrice - b.strikePrice);
+
+                setBackupData(newData);
 
                 return newData;
             });
@@ -99,7 +106,7 @@ const Table = () => {
     } = useTable(
         {
             columns,
-            data,
+            data: backupData,
         },
         useGlobalFilter,
         useSortBy
