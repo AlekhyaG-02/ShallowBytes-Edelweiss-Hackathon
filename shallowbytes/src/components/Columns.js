@@ -535,6 +535,7 @@ export const GColumns = [
         Cell: (props) => {
             return props.value;
         }
+
     },
     {
         id: 'pcol1',

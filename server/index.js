@@ -176,53 +176,60 @@ client.on('connect', () => {
                 IV = IV.toFixed(2)
                 let packetData = {}
 
-                if (symbolDetails.typeOfOption === "CE") {
+                IV = Number(IV) > 10000 ? 0 : IV;
 
-                    packetData = {
-                        calltradingSymbol: String(tradingSymbol).replace(/\0/g, ''),
-                        calltradeIndex: symbolDetails.typeOfIndex,
-                        tradeIndex: symbolDetails.typeOfIndex,
-                        calltradeOptionType: symbolDetails.typeOfOption,
-                        calltradeDate: symbolDetails.date,
-                        callstrikePrice: Number(symbolDetails.strikePrice),
-                        strikePrice: Number(symbolDetails.strikePrice),
-                        calltimestamp: symbolDetails.timestamp,
-                        callsequenceNumber: sequenceNumber,
-                        callLTP: LTP,
-                        callLTQ: LTQ,
-                        callchangePrice: Number((((LTP - previousClose) * 100) / previousClose).toFixed(2)),
-                        callvolume: volume,
-                        callbidPrice: bidPrice,
-                        callbidQuantity: bidQuantity,
-                        callaskPrice: askPrice,
-                        callaskQuantity: askQuantity,
-                        callOI: OI,
-                        callchangeOI: OI - previousOI,
-                        callIV: Number(IV).toFixed(2)
+                if (symbolDetails.strikePrice > 0) {
+
+                    if (symbolDetails.typeOfOption === "CE") {
+
+
+                        packetData = {
+                            calltradingSymbol: String(tradingSymbol).replace(/\0/g, ''),
+                            calltradeIndex: symbolDetails.typeOfIndex,
+                            tradeIndex: symbolDetails.typeOfIndex,
+                            calltradeOptionType: symbolDetails.typeOfOption,
+                            calltradeDate: symbolDetails.date,
+                            callstrikePrice: Number(symbolDetails.strikePrice),
+                            strikePrice: Number(symbolDetails.strikePrice),
+                            calltimestamp: symbolDetails.timestamp,
+                            callsequenceNumber: sequenceNumber,
+                            callLTP: LTP,
+                            callLTQ: LTQ,
+                            callchangePrice: Number((((LTP - previousClose) * 100) / previousClose).toFixed(2)),
+                            callvolume: volume,
+                            callbidPrice: bidPrice,
+                            callbidQuantity: bidQuantity,
+                            callaskPrice: askPrice,
+                            callaskQuantity: askQuantity,
+                            callOI: OI,
+                            callchangeOI: OI - previousOI,
+                            callIV: Number(IV).toFixed(2)
+                        }
                     }
-                }
-                else {
-                    packetData = {
-                        puttradingSymbol: String(tradingSymbol).replace(/\0/g, ''),
-                        puttradeIndex: symbolDetails.typeOfIndex,
-                        tradeIndex: symbolDetails.typeOfIndex,
-                        puttradeOptionType: symbolDetails.typeOfOption,
-                        puttradeDate: symbolDetails.date,
-                        putstrikePrice: Number(symbolDetails.strikePrice),
-                        strikePrice: Number(symbolDetails.strikePrice),
-                        puttimestamp: symbolDetails.timestamp,
-                        putsequenceNumber: sequenceNumber,
-                        putLTP: LTP,
-                        putLTQ: LTQ,
-                        putchangePrice: Number((((LTP - previousClose) * 100) / previousClose).toFixed(2)),
-                        putvolume: volume,
-                        putbidPrice: bidPrice,
-                        putbidQuantity: bidQuantity,
-                        putaskPrice: askPrice,
-                        putaskQuantity: askQuantity,
-                        putOI: OI,
-                        putchangeOI: OI - previousOI,
-                        putIV: Number(IV).toFixed(2)
+
+                    else {
+                        packetData = {
+                            puttradingSymbol: String(tradingSymbol).replace(/\0/g, ''),
+                            puttradeIndex: symbolDetails.typeOfIndex,
+                            tradeIndex: symbolDetails.typeOfIndex,
+                            puttradeOptionType: symbolDetails.typeOfOption,
+                            puttradeDate: symbolDetails.date,
+                            putstrikePrice: Number(symbolDetails.strikePrice),
+                            strikePrice: Number(symbolDetails.strikePrice),
+                            puttimestamp: symbolDetails.timestamp,
+                            putsequenceNumber: sequenceNumber,
+                            putLTP: LTP,
+                            putLTQ: LTQ,
+                            putchangePrice: Number((((LTP - previousClose) * 100) / previousClose).toFixed(2)),
+                            putvolume: volume,
+                            putbidPrice: bidPrice,
+                            putbidQuantity: bidQuantity,
+                            putaskPrice: askPrice,
+                            putaskQuantity: askQuantity,
+                            putOI: OI,
+                            putchangeOI: OI - previousOI,
+                            putIV: Number(IV).toFixed(2)
+                        }
                     }
                 }
 

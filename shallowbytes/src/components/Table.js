@@ -14,13 +14,13 @@ const Table = () => {
     // const [strikePriceOptions, setStrikePriceOptions] = useState([]);
     // const [selectedFilter, setSelectedFilter] = useState('');
 
-
     useEffect(() => {
         const ws = new WebSocket('ws://localhost:8000');
 
         ws.onmessage = async (event) => {
             const packetData = await JSON.parse(event.data);
 
+            console.log(packetData);
 
             setData((prevData) => {
                 const newData = [...prevData];
@@ -41,30 +41,7 @@ const Table = () => {
                     newData.push(packetData);
                 }
 
-                // const uniqueStrikePrices = [
-                //     ...new Set(newData.map((row) => row.strikePrice))
-                // ];
-
-                // const sortedStrikePrices = uniqueStrikePrices.sort((a, b) => a - b);
-
-                // const options = uniqueStrikePrices.map((strikePrice) => ({
-                //     value: strikePrice,
-                //     label: strikePrice
-                // }));
-                // const options = [
-                //     { value: '', label: 'ALL' },
-                //     ...sortedStrikePrices.map((strikePrice) => ({
-                //         value: strikePrice,
-                //         label: strikePrice
-                //     }))
-                // ];
-
-
-                // setStrikePriceOptions(options);
-
                 newData.sort((a, b) => a.strikePrice - b.strikePrice);
-
-                setBackupData(newData);
 
                 return newData;
             });
@@ -92,8 +69,9 @@ const Table = () => {
     //     };
     // }, []);
 
-
-    const optionChainsData = useMemo(() => data, [data])
+    useEffect(() => {
+        setBackupData(data);
+    }, [data]);
 
     const {
         getTableProps,
@@ -106,7 +84,7 @@ const Table = () => {
     } = useTable(
         {
             columns,
-            data: backupData,
+            data: data ? data : backupData,
         },
         useGlobalFilter,
         useSortBy
@@ -159,7 +137,10 @@ const Table = () => {
 
     return (
         <>
-            <h1>Option Chains</h1>
+            <div className='title'>
+                <h1>Options Chain</h1>
+                <small>By <span className='smallSpan'>ShallowBytes</span></small>
+            </div>
             {/* <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} /> */}
             <Filter name="Filter" filter={globalFilter} setFilter={setGlobalFilter} options={options} />
             {/* <Filter

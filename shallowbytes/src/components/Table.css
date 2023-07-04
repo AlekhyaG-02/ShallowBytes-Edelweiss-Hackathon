@@ -1,9 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-html {}
-
 body {
     font-family: "Poppins", sans-serif;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgb(113, 113, 113);
+}
+
+.smallSpan {
+    color: #146C94;
+    border-bottom: 2px solid #384955;
 }
 
 table {
@@ -12,16 +24,35 @@ table {
     white-space: nowrap;
     overflow-wrap: break-word;
     width: 100%;
+    background-color: #F6F1F1;
+}
+
+#tcol1 {
+    font-weight: bold;
 }
 
 th,
 td {
-    border: 1px solid #ddd;
     padding: 8px;
+    border-right: 1px solid #eee;
+    border-left: 1px solid #eee;
+    font-size: 80%;
+}
+
+tr {
+    border-bottom: 1px solid #eee;
+    font-size: 71%;
 }
 
 th {
-    background-color: #f2f2f2;
+    background-color: #146C94;
+    color: white;
+    border-left: 1px solid #eee;
+    border-right: 1px solid #eee;
+}
+
+tr:nth-child(odd) {
+    background-color: #AFD3E2;
 }
 
 input {
@@ -32,8 +63,9 @@ input {
 }
 
 h1 {
-    text-align: center;
-    margin-bottom: 20px;
+    padding: 0;
+    margin: 0;
+    font-size: 250%;
 }
 
 span {
