@@ -6,7 +6,7 @@ export const Filter = ({ name, filter, setFilter, options }) => {
     };
 
     return (
-        <span>
+        <span className='Filter'>
             {name}: {' '}
             <select value={filter} onChange={handleFilterChange}>
                 {options.map((option) => (

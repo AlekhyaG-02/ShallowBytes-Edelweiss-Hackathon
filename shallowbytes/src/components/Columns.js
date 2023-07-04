@@ -204,14 +204,6 @@ export const CallColumns = [
                     return props.value;
                 }
             },
-            // {
-            //     Header: 'Type',
-            //     id: 'csub_col1a',
-            //     accessor: 'tradeOptionType',
-            //     Cell: (props) => {
-            //         return props.value;
-            //     }
-            // },
             {
                 Header: 'OI',
                 id: 'csub_col1b',
@@ -309,14 +301,6 @@ export const PutColumns = [
                     return props.value;
                 }
             },
-            // {
-            //     Header: 'Type',
-            //     id: 'psub_col1a',
-            //     accessor: 'tradeOptionType',
-            //     Cell: (props) => {
-            //         return props.value;
-            //     }
-            // },
             {
                 Header: 'OI',
                 id: 'psub_col1b',
@@ -422,22 +406,6 @@ export const GColumns = [
         id: 'ccol1',
         Header: 'Call',
         columns: [
-            // {
-            //     id: 'csub_col1',
-            //     Header: 'Trade Index',
-            //     accessor: 'tradeIndex',
-            //     Cell: (props) => {
-            //         return props.value;
-            //     }
-            // },
-            // {
-            //     Header: 'Type',
-            //     id: 'csub_col1a',
-            //     accessor: 'tradeOptionType',
-            //     Cell: (props) => {
-            //         return props.value;
-            //     }
-            // },
             {
                 Header: 'OI',
                 id: 'csub_col1b',
@@ -510,14 +478,6 @@ export const GColumns = [
                     return props.value;
                 },
             },
-            // {
-            //     Header: 'Strike',
-            //     id: 'csub_col1k',
-            //     accessor: 'strikePrice',
-            //     Cell: (props) => {
-            //         return props.value;
-            //     },
-            // },
             {
                 Header: 'IV',
                 id: 'csub_col1m',
@@ -541,21 +501,7 @@ export const GColumns = [
         id: 'pcol1',
         Header: 'Put',
         columns: [
-            // {
-            //     Header: 'Trade Index',
-            //     accessor: 'tradeIndex',
-            //     Cell: (props) => {
-            //         return props.value;
-            //     }
-            // },
-            // {
-            //     Header: 'Type',
-            //     id: 'psub_col1a',
-            //     accessor: 'tradeOptionType',
-            //     Cell: (props) => {
-            //         return props.value;
-            //     }
-            // },
+
             {
                 Header: 'Expiry',
                 id: 'psub_col1l',
@@ -636,14 +582,6 @@ export const GColumns = [
                     return props.value;
                 },
             },
-            // {
-            //     Header: 'Strike',
-            //     id: 'psub_col1k',
-            //     accessor: 'strikePrice',
-            //     Cell: (props) => {
-            //         return props.value;
-            //     },
-            // },
             {
                 Header: 'IV',
                 id: 'psub_col1m',
