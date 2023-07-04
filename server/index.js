@@ -161,10 +161,10 @@ client.on('connect', () => {
                     let ttmIV = Number(symbolDetails.ttm).toFixed(5)
 
                     if (symbolDetails.typeOfOption == "CE") {
-                        IV = getImpliedVolatility(optionLTP, indexIV, strikePriceIV, ttmIV, 0, "put")
+                        IV = getImpliedVolatility(optionLTP, indexIV, strikePriceIV, ttmIV, 0.05, "call")
                     }
                     else {
-                        IV = getImpliedVolatility(optionLTP, indexIV, strikePriceIV, ttmIV, 0, "call")
+                        IV = getImpliedVolatility(optionLTP, indexIV, strikePriceIV, ttmIV, 0.05, "put")
                     }
                 }
                 else {

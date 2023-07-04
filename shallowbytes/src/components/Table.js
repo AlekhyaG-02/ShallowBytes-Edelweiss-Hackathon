@@ -16,7 +16,7 @@ const Table = () => {
         ws.onmessage = async (event) => {
             const packetData = await JSON.parse(event.data);
 
-            // console.log(packetData);
+            console.log(packetData);
 
             setData((prevData) => {
                 const newData = [...prevData];
@@ -77,14 +77,14 @@ const Table = () => {
     return (
         <>
             <div className='title'>
-                <h1>Options Chain</h1>
+                <h1>ChainMaster</h1>
                 <small>By <span className='smallSpan'>ShallowBytes</span></small>
             </div>
 
             <Filter name="Filter" filter={globalFilter} setFilter={setGlobalFilter} options={options} />
 
             <table {...getTableProps()}>
-                <thead>
+                <thead className='tablehead'>
                     {headerGroups.map((headerGroup) => (
                         <tr {...headerGroup.getHeaderGroupProps()}>
                             {headerGroup.headers.map((column) => (
@@ -102,7 +102,7 @@ const Table = () => {
                     {rows.map((row) => {
                         prepareRow(row)
                         return (
-                            <tr {...row.getRowProps()}>
+                            <tr {...row.getRowProps()} className='tablebodyrow'>
                                 {row.cells.map((cell) => (
                                     <td {...cell.getCellProps()}>
                                         {cell.render('Cell')}

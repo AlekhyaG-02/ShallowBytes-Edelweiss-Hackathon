@@ -1,7 +1,8 @@
-# Welcome to ChainMaster
+# ChainMaster
 
-This website is currently in development.
-The instructions to run and operate this website will be added further as the website is completed.
+### Installation (Steps)
+
+First:
 
 ## Team
 
