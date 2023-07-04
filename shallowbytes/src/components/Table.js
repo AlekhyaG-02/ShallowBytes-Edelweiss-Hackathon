@@ -9,56 +9,76 @@ import { Filter } from './Filter';
 const Table = () => {
     const columns = useMemo(() => GColumns, [])
     const [data, setData] = useState([]);
+    // const [strikePriceOptions, setStrikePriceOptions] = useState([]);
+    // const [selectedFilter, setSelectedFilter] = useState('');
+
 
     useEffect(() => {
         const ws = new WebSocket('ws://localhost:8000');
 
-        ws.onmessage = (event) => {
-            const packetData = JSON.parse(event.data);
-            setData((prevData) => [...prevData, packetData]);
+        ws.onmessage = async (event) => {
+            const packetData = await JSON.parse(event.data);
+            setData((prevData) => {
+                const newData = [...prevData];
 
-            // if (packetData.tradeOptionType === 'CE') {
-            //     setData((prevData) => {
-            //         const newData = [...prevData];
-            //         const existingRow = newData.find(
-            //             (row) => row.strikePrice === packetData.strikePrice
-            //         );
-            //         if (existingRow) {
-            //             Object.assign(existingRow, packetData);
-            //         } else {
-            //             const newRow = { strikePrice: packetData.strikePrice };
-            //             newData.push(Object.assign(newRow, packetData));
-            //         }
-            //         return newData;
-            //     });
-            // } else if (packetData.tradeOptionType === 'PE') {
-            //     setData((prevData) => {
-            //         const newData = [...prevData];
-            //         const existingRow = newData.find(
-            //             (row) => row.strikePrice === packetData.strikePrice
-            //         );
-            //         if (existingRow) {
-            //             Object.assign(existingRow, packetData);
-            //         } else {
-            //             const newRow = { strikePrice: packetData.strikePrice };
-            //             newData.push(Object.assign(newRow, packetData));
-            //         }
-            //         return newData;
-            //     });
-            // }
+                // Find the index of the existing row based on strikePrice and tradeOptionType
+                const existingRowIndex = newData.findIndex(
+                    (row) =>
+                        row.strikePrice === packetData.strikePrice &&
+                        row.tradeOptionType === packetData.tradeOptionType
+                );
+
+                if (existingRowIndex !== -1) {
+                    // If the existing row is found, update it with new data
+                    newData[existingRowIndex] = { ...newData[existingRowIndex], ...packetData };
+                } else {
+                    // If the existing row is not found, add a new row with the new data
+                    newData.push(packetData);
+                }
+
+                // const uniqueStrikePrices = [
+                //     ...new Set(newData.map((row) => row.strikePrice))
+                // ];
+
+                // const sortedStrikePrices = uniqueStrikePrices.sort((a, b) => a - b);
+
+                // const options = uniqueStrikePrices.map((strikePrice) => ({
+                //     value: strikePrice,
+                //     label: strikePrice
+                // }));
+                // const options = [
+                //     { value: '', label: 'ALL' },
+                //     ...sortedStrikePrices.map((strikePrice) => ({
+                //         value: strikePrice,
+                //         label: strikePrice
+                //     }))
+                // ];
 
 
+                // setStrikePriceOptions(options);
+
+                // newData.sort((a, b) => a.strikePrice - b.strikePrice);
+
+                return newData;
+            });
         };
 
-        return () => {
-            ws.close();
-        };
     }, []);
 
     // useEffect(() => {
     //     const interval = setInterval(() => {
+    //         setData((prevData) => [...prevData]);
+    //     }, 5000);
+
+    //     return () => {
+    //         clearInterval(interval);
+    //     };
+    // }, []);
+
+    // useEffect(() => {
+    //     const interval = setInterval(() => {
     //         window.location.reload();
-    //     }, 5000); // Refresh every 5 seconds
+    //     }, 15000); // Refresh every 5 seconds
 
     //     return () => {
     //         clearInterval(interval);
@@ -126,7 +146,7 @@ const Table = () => {
         { value: 'ALLBANKS', label: 'ALLBANKS' },
         { value: 'MAINIDX', label: 'MAINIDX' },
         { value: 'FINANCIALS', label: 'FINANCIALS' },
-        { value: 'MIDCAPS', label: 'MIDCAPS' },
+        { value: 'MIDCAP', label: 'MIDCAP' },
     ];
 
 
@@ -135,7 +155,12 @@ const Table = () => {
             <h1>Option Chains</h1>
             {/* <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} /> */}
             <Filter name="Filter" filter={globalFilter} setFilter={setGlobalFilter} options={options} />
-            {/* <Filter name="Strike Price" filter={globalFilter} setFilter={setGlobalFilter} options={strikePriceOptions} /> */}
+            {/* <Filter
+                name="Strike Price"
+                filter={globalFilter}
+                setFilter={setGlobalFilter}
+                options={strikePriceOptions}
+            /> */}
             <table {...getTableProps()}>
                 <thead>
                     {headerGroups.map((headerGroup) => (

@@ -28,7 +28,7 @@ export const Columns = [
                 },
             },
             {
-                Header: 'Change in OI',
+                Header: 'Chng OI',
                 id: 'sub_col1c',
                 accessor: 'changeOI',
                 Cell: (props) => {
@@ -36,7 +36,7 @@ export const Columns = [
                 },
             },
             {
-                Header: 'VOLUME',
+                Header: 'Vol',
                 id: 'sub_col1d',
                 accessor: 'volume',
                 Cell: (props) => {
@@ -52,7 +52,7 @@ export const Columns = [
                 },
             },
             {
-                Header: 'Change in Price',
+                Header: 'Chng%',
                 id: 'sub_col1f',
                 accessor: 'changePrice',
                 Cell: (props) => {
@@ -68,7 +68,7 @@ export const Columns = [
                 },
             },
             {
-                Header: 'Bid Quantity',
+                Header: 'Bid Qty',
                 id: 'sub_col1h',
                 accessor: 'bidQuantity',
                 Cell: (props) => {
@@ -133,7 +133,7 @@ export const TestCols = [
                 }
             },
             {
-                Header: 'Change in OI',
+                Header: 'Chng OI',
                 id: 'sub_col1c',
                 accessor: (d) => {
                     if (d.tradeOptionType === 'CE') {
@@ -175,7 +175,7 @@ export const TestCols = [
                 }
             },
             {
-                Header: 'Change in OI',
+                Header: 'Chng OI',
                 id: 'sub_col2c',
                 accessor: (d) => {
                     if (d.tradeOptionType === 'PE') {
@@ -221,7 +221,7 @@ export const CallColumns = [
                 },
             },
             {
-                Header: 'Change in OI',
+                Header: 'Chng OI',
                 id: 'csub_col1c',
                 accessor: 'callchangeOI',
                 Cell: (props) => {
@@ -229,7 +229,7 @@ export const CallColumns = [
                 },
             },
             {
-                Header: 'VOLUME',
+                Header: 'Vol',
                 id: 'csub_col1d',
                 accessor: 'callvolume',
                 Cell: (props) => {
@@ -245,7 +245,7 @@ export const CallColumns = [
                 },
             },
             {
-                Header: 'Change in Price',
+                Header: 'Chng%',
                 id: 'csub_col1f',
                 accessor: 'callchangePrice',
                 Cell: (props) => {
@@ -261,7 +261,7 @@ export const CallColumns = [
                 },
             },
             {
-                Header: 'Bid Quantity',
+                Header: 'Bid Qty',
                 id: 'csub_col1h',
                 accessor: 'callbidQuantity',
                 Cell: (props) => {
@@ -277,7 +277,7 @@ export const CallColumns = [
                 },
             },
             {
-                Header: 'Ask Quantity',
+                Header: 'Ask Qty',
                 id: 'csub_col1j',
                 accessor: 'callaskQuantity',
                 Cell: (props) => {
@@ -326,7 +326,7 @@ export const PutColumns = [
                 },
             },
             {
-                Header: 'Change in OI',
+                Header: 'Chng OI',
                 id: 'psub_col1c',
                 accessor: 'putchangeOI',
                 Cell: (props) => {
@@ -334,7 +334,7 @@ export const PutColumns = [
                 },
             },
             {
-                Header: 'VOLUME',
+                Header: 'Vol',
                 id: 'psub_col1d',
                 accessor: 'putvolume',
                 Cell: (props) => {
@@ -350,7 +350,7 @@ export const PutColumns = [
                 },
             },
             {
-                Header: 'Change in Price',
+                Header: 'Chng%',
                 id: 'psub_col1f',
                 accessor: 'putchangePrice',
                 Cell: (props) => {
@@ -366,7 +366,7 @@ export const PutColumns = [
                 },
             },
             {
-                Header: 'Bid Quantity',
+                Header: 'Bid Qty',
                 id: 'psub_col1h',
                 accessor: 'putbidQuantity',
                 Cell: (props) => {
@@ -382,7 +382,7 @@ export const PutColumns = [
                 },
             },
             {
-                Header: 'Ask Quantity',
+                Header: 'Ask Qty',
                 id: 'psub_col1j',
                 accessor: 'putaskQuantity',
                 Cell: (props) => {
@@ -406,6 +406,14 @@ export const GColumns = [
         id: 'tIcol1',
         Header: 'Trade Index',
         accessor: 'tradeIndex',
+        Cell: (props) => {
+            return props.value;
+        }
+    },
+    {
+        Header: 'Expiry',
+        id: 'csub_col1l',
+        accessor: 'calltradeDate',
         Cell: (props) => {
             return props.value;
         }
@@ -439,7 +447,7 @@ export const GColumns = [
                 },
             },
             {
-                Header: 'Change in OI',
+                Header: 'Chng OI',
                 id: 'csub_col1c',
                 accessor: 'callchangeOI',
                 Cell: (props) => {
@@ -447,7 +455,7 @@ export const GColumns = [
                 },
             },
             {
-                Header: 'VOLUME',
+                Header: 'Vol',
                 id: 'csub_col1d',
                 accessor: 'callvolume',
                 Cell: (props) => {
@@ -463,7 +471,7 @@ export const GColumns = [
                 },
             },
             {
-                Header: 'Change in Price',
+                Header: 'Chng%',
                 id: 'csub_col1f',
                 accessor: 'callchangePrice',
                 Cell: (props) => {
@@ -479,7 +487,7 @@ export const GColumns = [
                 },
             },
             {
-                Header: 'Bid Quantity',
+                Header: 'Bid Qty',
                 id: 'csub_col1h',
                 accessor: 'callbidQuantity',
                 Cell: (props) => {
@@ -495,7 +503,7 @@ export const GColumns = [
                 },
             },
             {
-                Header: 'Ask Quantity',
+                Header: 'Ask Qty',
                 id: 'csub_col1j',
                 accessor: 'callaskQuantity',
                 Cell: (props) => {
@@ -510,6 +518,14 @@ export const GColumns = [
             //         return props.value;
             //     },
             // },
+            {
+                Header: 'IV',
+                id: 'csub_col1m',
+                accessor: 'callIV',
+                Cell: (props) => {
+                    return props.value;
+                },
+            }
         ],
     },
     {
@@ -540,6 +556,14 @@ export const GColumns = [
             //     }
             // },
             {
+                Header: 'Expiry',
+                id: 'psub_col1l',
+                accessor: 'puttradeDate',
+                Cell: (props) => {
+                    return props.value;
+                }
+            },
+            {
                 Header: 'OI',
                 id: 'psub_col1b',
                 accessor: 'putOI',
@@ -548,7 +572,7 @@ export const GColumns = [
                 },
             },
             {
-                Header: 'Change in OI',
+                Header: 'Chng OI',
                 id: 'psub_col1c',
                 accessor: 'putchangeOI',
                 Cell: (props) => {
@@ -556,7 +580,7 @@ export const GColumns = [
                 },
             },
             {
-                Header: 'VOLUME',
+                Header: 'Vol',
                 id: 'psub_col1d',
                 accessor: 'putvolume',
                 Cell: (props) => {
@@ -572,7 +596,7 @@ export const GColumns = [
                 },
             },
             {
-                Header: 'Change in Price',
+                Header: 'Chng%',
                 id: 'psub_col1f',
                 accessor: 'putchangePrice',
                 Cell: (props) => {
@@ -588,7 +612,7 @@ export const GColumns = [
                 },
             },
             {
-                Header: 'Bid Quantity',
+                Header: 'Bid Qty',
                 id: 'psub_col1h',
                 accessor: 'putbidQuantity',
                 Cell: (props) => {
@@ -604,7 +628,7 @@ export const GColumns = [
                 },
             },
             {
-                Header: 'Ask Quantity',
+                Header: 'Ask Qty',
                 id: 'psub_col1j',
                 accessor: 'putaskQuantity',
                 Cell: (props) => {
@@ -619,6 +643,14 @@ export const GColumns = [
             //         return props.value;
             //     },
             // },
+            {
+                Header: 'IV',
+                id: 'psub_col1m',
+                accessor: 'putIV',
+                Cell: (props) => {
+                    return props.value;
+                }
+            }
         ],
     }
 ]

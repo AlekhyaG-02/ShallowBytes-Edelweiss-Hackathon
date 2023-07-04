@@ -193,7 +193,7 @@ client.on('data', (data) => {
                 callaskQuantity: askQuantity,
                 callOI: OI,
                 callchangeOI: OI - previousOI,
-                callIV: IV
+                callIV: Number(IV).toFixed(2)
             }
         }
         else {
@@ -219,7 +219,7 @@ client.on('data', (data) => {
                 putaskQuantity: askQuantity,
                 putOI: OI,
                 putchangeOI: OI - previousOI,
-                putIV: IV
+                putIV: Number(IV).toFixed(2)
             }
         }
 

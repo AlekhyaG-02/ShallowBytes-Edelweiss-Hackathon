@@ -71,7 +71,7 @@ const CPTable = () => {
         { value: 'ALLBANKS', label: 'ALLBANKS' },
         { value: 'MAINIDX', label: 'MAINIDX' },
         { value: 'FINANCIALS', label: 'FINANCIALS' },
-        { value: 'MIDCAPS', label: 'MIDCAPS' },
+        { value: 'MIDCAP', label: 'MIDCAP' },
     ];
 
     useEffect(() => {
