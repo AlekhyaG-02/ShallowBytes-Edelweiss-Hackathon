@@ -52,6 +52,12 @@
    npm start
    ```
 
+## Resources
+
+The video and the presentation has been uploaded under the 'resource' folder.
+
+Alternatively, the video can be viewed on this [link](https://drive.google.com/file/d/1oWY_Omj6O-aSqBB6dq-lvlQvHMhFMqNh/view?usp=sharing).
+
 ## Team
 
 - Alekhya Gorgantu
